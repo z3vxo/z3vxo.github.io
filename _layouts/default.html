@@ -251,6 +251,39 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
+    
+    .post-content details {
+  border: 1px solid var(--border-accent);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin: 1.5rem 0;
+  background: var(--bg-card);
+}
+
+.post-content details[open] {
+  border-color: var(--accent);
+  border-color: rgba(0, 229, 160, 0.3);
+}
+
+.post-content summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-primary);
+  list-style: none;
+}
+
+.post-content summary::before {
+  content: '▸ ';
+  color: var(--accent);
+}
+
+.post-content details[open] summary::before {
+  content: '▾ ';
+}
+
+.post-content summary::-webkit-details-marker {
+  display: none;
+}
 
     /* ═══════════════════════════════════════
        SINGLE POST
