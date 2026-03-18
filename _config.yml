@@ -1,5 +1,19 @@
-title: Cybersec blog
+title: Cybersec Blog
+description: "Offensive security, reverse engineering, and the digital underground."
+baseurl: ""
+url: ""
 future: true
-remote_theme: pages-themes/hacker@v0.2.0
-plugins:
-  - jekyll-remote-theme
+permalink: /:year/:month/:title/
+markdown: kramdown
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+
+
+#title: Cybersec blog
+#future: true
+#remote_theme: pages-themes/hacker@v0.2.0
+#plugins:
+ #- jekyll-remote-theme
