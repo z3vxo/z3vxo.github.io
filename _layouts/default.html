@@ -299,6 +299,18 @@
       color: var(--text-muted);
     }
 
+    .read-time {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .read-time::before {
+      content: '·';
+      margin-right: 0.4rem;
+      opacity: 0.5;
+    }
+
     .post-tags {
       display: flex;
       gap: 0.4rem;
@@ -377,6 +389,12 @@
       font-size: 0.75rem;
       color: var(--text-muted);
       display: inline-block;
+    }
+
+    .post-header .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0;
       margin-bottom: 1.2rem;
     }
 

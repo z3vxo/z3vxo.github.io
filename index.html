@@ -10,8 +10,12 @@ layout: default
 <div class="post-grid">
   {% for post in site.posts %}
   <a href="{{ post.url | relative_url }}" class="post-card">
+    {% assign words = post.content | number_of_words %}
+    {% assign read_time = words | divided_by: 200 %}
+    {% if read_time == 0 %}{% assign read_time = 1 %}{% endif %}
     <div class="post-card-meta">
       <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+      <span class="read-time">{{ read_time }} min read</span>
       {% if post.tags %}
       <div class="post-tags">
         {% for tag in post.tags limit:2 %}
