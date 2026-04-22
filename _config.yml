@@ -6,6 +6,11 @@ future: true
 permalink: /:year/:month/:title/
 markdown: kramdown
 
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
 exclude:
   - README.md
   - Gemfile
