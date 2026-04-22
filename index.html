@@ -8,10 +8,6 @@ layout: default
 </div>
 
 <!-- Projects Section -->
-<div class="section-header">
-  <h2>Projects</h2>
-  <a href="/projects/" class="view-all">view all →</a>
-</div>
 
 <div class="post-grid">
   {% assign recent_projects = site.projects | sort: 'date' | reverse %}
@@ -30,10 +26,6 @@ layout: default
 </div>
 
 <!-- Blog Posts Section -->
-<div class="section-header">
-  <h2>Blog Posts</h2>
-  <a href="/blogposts/" class="view-all">view all →</a>
-</div>
 
 <div class="post-grid">
   {% for post in site.posts limit:3 %}
