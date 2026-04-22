@@ -1,15 +1,10 @@
-title: Cybersec Blog
-description: "Offensive security, Malwarw developtment and all things cybersecurity."
+title: z3vxo Blog
+description: "Offensive security, Malware developtment and all things cybersecurity."
 baseurl: ""
 url: ""
 future: true
 permalink: /:year/:month/:title/
 markdown: kramdown
-
-collections:
-  projects:
-    output: true
-    permalink: /projects/:name/
 
 exclude:
   - README.md
