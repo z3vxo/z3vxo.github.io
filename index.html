@@ -3,32 +3,12 @@ layout: default
 ---
 
 <div class="page-hero">
-  <div class="hero-label">// home</div>
+  <div class="hero-label">// recent posts</div>
   <p>{{ site.description }}</p>
 </div>
 
-<!-- Projects Section -->
-
 <div class="post-grid">
-  {% assign recent_projects = site.projects | sort: 'date' | reverse %}
-  {% for project in recent_projects limit:3 %}
-  <a href="{{ project.url | relative_url }}" class="post-card">
-    <div class="post-card-meta">
-      <span class="post-date">{{ project.date | date: "%Y-%m-%d" }}</span>
-    </div>
-    <div class="post-card-title">{{ project.title }}</div>
-    {% if project.excerpt %}
-    <div class="post-card-excerpt">{{ project.excerpt | strip_html | truncatewords: 25 }}</div>
-    {% endif %}
-    <span class="post-read-more">view project →</span>
-  </a>
-  {% endfor %}
-</div>
-
-<!-- Blog Posts Section -->
-
-<div class="post-grid">
-  {% for post in site.posts limit:3 %}
+  {% for post in site.posts %}
   <a href="{{ post.url | relative_url }}" class="post-card">
     {% assign words = post.content | number_of_words %}
     {% assign read_time = words | divided_by: 200 %}
@@ -52,5 +32,3 @@ layout: default
   </a>
   {% endfor %}
 </div>
-
-
