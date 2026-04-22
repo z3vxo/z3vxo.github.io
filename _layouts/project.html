@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <style>
+    /* Optional tweaks */
+    body { max-width: 860px; }
+    .project-meta { color: var(--text-light); font-size: 0.9rem; margin-bottom: 2rem; }
+  </style>
+</head>
+<body>
+
+  <!-- OPTIONAL: remove this <header> block if you don't want nav -->
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/projects/">All Projects</a>
+      <a href="/blogposts/">Blog</a>
+    </nav>
+    <h1>{{ site.title }}</h1>
+  </header>
+
+  <main>
+    <h1>{{ page.title }}</h1>
+
+    {% if page.date %}
+    <div class="project-meta">
+      {{ page.date | date: "%B %d, %Y" }}
+      {% if page.tags %}
+        &nbsp;·&nbsp;
+        {% for tag in page.tags %}
+          <span>{{ tag }}</span>{% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {{ content }}
+  </main>
+
+  <footer>
+    <a href="/">{{ site.title }}</a> · <a href="/projects/">Projects</a> · <a href="/blogposts/">Blog</a>
+  </footer>
+
+</body>
+</html>
+
