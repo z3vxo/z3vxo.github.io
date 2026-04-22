@@ -1,5 +1,5 @@
 ---
-title: My Project
+title: Kronos C2 framework
 date: 2025-01-15
 ---
 
