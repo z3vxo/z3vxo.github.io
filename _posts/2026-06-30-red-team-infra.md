@@ -23,7 +23,7 @@ There’s no separation, no fallback, no resilience. It’s a single point of fa
 
 an example of this is below
 
-![Primitive Architecture](/assets/IMG_2077.jpeg)
+![Primitive Architecture](/assets/images/IMG_2077.jpeg)
 
 
 
