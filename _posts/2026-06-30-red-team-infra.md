@@ -52,7 +52,7 @@ But the redirector itself has a public IP. Maybe it’s not a fully trusted IP o
 <summary>NOTE</summary>
 Not all engagements need to abuse a CDN. If your redirector’s IP is clean or you don’t have access to a CDN then it’s perfectly fine to not use this.
 
-also im not going to be covering domaing as the major providers killed that off, but if you would like to learn it check [here](https://www.zscaler.com/blogs/security-research/analysis-domain-fronting-technique-abuse-and-hiding-cdns)
+also im not going to be covering domain fronting as the major providers killed that off, but if you would like to learn it check [here](https://www.zscaler.com/blogs/security-research/analysis-domain-fronting-technique-abuse-and-hiding-cdns)
 </details>
 Content delivery networks are services legitimately used by basically every modern website. Almost every large cloud provider offers one — Amazon has CloudFront, Cloudflare has their CDN, Google has Cloud CDN, Microsoft has Azure Front Door.
 
