@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "From the Browser To The Wire: What happens when you press enter"
+title: "cyber verified program proof"
 date: 2025-05-06
 ---
 
