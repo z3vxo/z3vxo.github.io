@@ -42,9 +42,8 @@ The team server should only ever allow direct connections from the redirector an
 
 this can be done by having the the team server on prem with a ssh/vpn tunnel connecting them or both inside a private VPC with only the redirector being publically reachable  
 now our architecture looks like so
-```
-compromised machine <-> redirector <-> team server 
-```
+
+![Upgraded Architecture](/assets/images/IMG_2078.jpeg)
 
 but the redirector itself has a public IP, maybe its not a fully trusted IP or under a known abused ASN, it could still be blocked, mapped or used by the blue team to stop you, so how do yoi solve this?
 
