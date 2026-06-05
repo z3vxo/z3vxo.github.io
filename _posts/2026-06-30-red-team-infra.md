@@ -60,10 +60,10 @@ What makes these useful for us is that their domains carry incredibly high trust
 This gives us two things:
 
 1. A trusted front for our redirector.
-Instead of the beacon calling out directly to our redirector, it calls out to a CDN URL, which is just a CNAME pointing back to our domain. The defender sees traffic going to *.cloudfront.net or *.azurefd.net, not to anything we own.
+Instead of the beacon calling out directly to our redirector, it calls out to a CDN, which then forwards the request to the redirector. The defender sees traffic going to *.cloudfront.net or *.azurefd.net which is incredibly common, and not to anything we own.
 
 2. Clean IPs.
-The IPs the beacon is actually hitting belong to the CDN provider, sitting inside trusted cloud ranges. No sketchy ASN, no 2 day old VPS IP — just infrastructure that looks completely legitimate.
+The IPs the beacon is actually hitting belong to the CDN provider, sitting inside trusted cloud ranges. No sketchy ASN, no 2 day old VPS IP, just infrastructure that looks completely legitimate.
 
 so now the architecture looks like this
 
