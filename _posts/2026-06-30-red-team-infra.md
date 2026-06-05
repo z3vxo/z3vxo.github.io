@@ -21,6 +21,10 @@ There’s no separation, no fallback, no resilience. It’s a single point of fa
 
 an example of this is below
 
+```
+compromised machine --> team server
+```
+
 
 
 that single arrow between the compromised machine and team server can be severed and the campaign is over
@@ -37,6 +41,10 @@ A redirector is a server that sits infront of the team server, all traffic to an
 The team server should only ever allow direct connections from the redirector and hopefully should be inside a private network not publicly reachable
 
 this can be done by having the the team server on prem with a ssh/vpn tunnel connecting them or both inside a private VPC with only the redirector being publically reachable  
+now our architecture looks like so
+```
+compromised machine <-> redirector <-> team server 
+```
 
 but the redirector itself has a public IP, maybe its not a fully trusted IP or under a known abused ASN, it could still be blocked, mapped or used by the blue team to stop you, so how do yoi solve this?
 
@@ -45,4 +53,20 @@ but the redirector itself has a public IP, maybe its not a fully trusted IP or u
 <summary>NOTE</summary>
 Not all engagements need to abuse a CDN, if your redirectors IP is clean or you dont have access to a CDN then its perfectly fine to not use this
 </details>
+Content delivery networks are services legitimately used by basically every modern website. Almost every large cloud provider offers one — Amazon has CloudFront, Cloudflare has their CDN, Google has Cloud CDN, Microsoft has Azure Front Door.
 
+What makes these useful for us is that their domains carry incredibly high trust. You can’t easily block them — if an org tried, they’d take down half the internet for their own users in the process.
+
+This gives us two things:
+
+1. A trusted front for our redirector.
+Instead of the beacon calling out directly to our redirector, it calls out to a CDN URL, which is just a CNAME pointing back to our domain. The defender sees traffic going to *.cloudfront.net or *.azurefd.net, not to anything we own.
+
+2. Clean IPs.
+The IPs the beacon is actually hitting belong to the CDN provider, sitting inside trusted cloud ranges. No sketchy ASN, no 2 day old VPS IP — just infrastructure that looks completely legitimate.
+
+so now the architecture looks like this
+
+```
+compromised machine -> cdn.domain.com -> CNAME resolves to CDN url -> CDN forwards request to redirector -> redirector filters and proxies to our team server
+```
