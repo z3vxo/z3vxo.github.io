@@ -21,7 +21,7 @@ There’s no separation, no fallback, no resilience. It’s a single point of fa
 
 an example of this is below
 
-<need to add image>
+
 
 that single arrow between the compromised machine and team server can be severed and the campaign is over
 
@@ -29,7 +29,9 @@ so how do we ensure our infrastructure is reliable and a single block doesnt bri
 
 # Redirectors
 A redirector is a server that sits infront of the team server, all traffic to and from the c2 is proxied through this, this does 2 things
+
 1. it ensures the target never directly interacts with the team server, they can block this server all they want but its created to be expendable, if it goes down we jusr spin up a new one, update dns ane continue with the engagement 
+
 2. it allows us to control who can touch our team server, the redirector handles filtering bots, scanners and most importantly the defenders, if the request does not contain a specific header, URI or paramter  they get a 404, decoy website or a redirect. the blue team can probe all they want but they wont find anything
 
 The team server should only ever allow direct connections from the redirector and hopefully should be inside a private network not publicly reachable
