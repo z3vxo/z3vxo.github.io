@@ -68,5 +68,5 @@ The IPs the beacon is actually hitting belong to the CDN provider, sitting insid
 so now the architecture looks like this
 
 ```
-compromised machine -> cdn.domain.com -> CNAME resolves to CDN url -> CDN forwards request to redirector -> redirector filters and proxies to our team server
+compromised machine <-> cdn.domain.com(resolves to cdn url via CNAME) <-> redirector <-> team server
 ```
