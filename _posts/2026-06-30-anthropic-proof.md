@@ -25,10 +25,10 @@ email: p9yfkg7t67@privaterelay.appleid.com
 ![Spudshed Acknowledgement](assets/images/spud.png){: style="max-width: 400px;"}
 
 # Disclosure 3: Department of Climate Change, Energy, the Environment and Water
-![DCEEW Disclosure](/assets/images/dceew_disclose.png){: style="max-width: 400px;"}
+![DCCEEW Disclosure](/assets/images/dceew_disclose.png){: style="max-width: 400px;"}
 
 -----
-![Spudshed Acknowledgement](/assets/images/dceew.png){: style="max-width: 400px;"}
+![DCCEEW Acknowledgement](/assets/images/dceew.png){: style="max-width: 400px;"}
 
 # Disclosure 4: Ripple Group
 ![Ripple Disclosure](/assets/images/ripple_diclose.png){: style="max-width: 400px;"}
