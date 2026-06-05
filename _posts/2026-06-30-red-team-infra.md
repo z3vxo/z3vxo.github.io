@@ -6,6 +6,8 @@ categories:
   - maldev
   - cybersec
 ---
+<style> body { background: #1e1e1e; color: #e0e0e0; } </style>
+
 
 # Intro
 Infrastructure makes or breaks an engagement, you could have the most evasive loader, the best phishing pretext but none of that matters if your beacon calls out to a 2 day old domain hosted on an IP in a sketchy ASN and a single new firewall rules destorys the engagement before it even began 
