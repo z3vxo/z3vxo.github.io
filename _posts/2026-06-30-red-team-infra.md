@@ -9,12 +9,12 @@ categories:
 <style> body { background: #1e1e1e; color: #e0e0e0; } </style>
 
 
-# Intro
+## Intro
 Infrastructure makes or breaks an engagement. You could have the most evasive loader, the best phishing pretext, but none of that matters if your beacon calls out to a 2 day old domain hosted on an IP in a sketchy ASN and a single new firewall rule destroys the engagement before it even began.
 In this blog post I will be going over the core concepts, why we design it the way we do, what each piece is and how to set it up.
 
 
-# The Primitive approach 
+## The Primitive approach 
 The most common mistake beginners make is standing up a team server on a publicly exposed VPS and calling it a day. Point your beacon at the IP, get a callback, job done right? Not quite.
 
 The moment your team server is directly exposed, you’ve handed defenders everything they need. One analyst spots the beacon traffic, one firewall rule gets pushed, and the engagement is over. Your C2 is burned, and with it every beacon calling home to that IP.
@@ -31,7 +31,7 @@ That single arrow between the compromised machine and team server can be severed
 
 So how do we ensure our infrastructure is reliable and a single block doesn’t bring it all down?
 
-# Redirectors
+## Redirectors
 A redirector is a server that sits in front of the team server. All traffic to and from the C2 is proxied through this, this does 2 things:
 
 1. It ensures the target never directly interacts with the team server. They can block this server all they want but it’s created to be expendable; if it goes down we just spin up a new one, update DNS and continue with the engagement.
@@ -47,7 +47,7 @@ Now our architecture looks like so
 
 But the redirector itself has a public IP. Maybe it’s not a fully trusted IP or it’s under a known abused ASN; it could still be blocked, mapped or used by the blue team to stop you, so how do you solve this?
 
-# Abusing CDNs
+## Abusing CDNs
 <details markdown="1">
 <summary>NOTE</summary>
 Not all engagements need to abuse a CDN. If your redirector’s IP is clean or you don’t have access to a CDN then it’s perfectly fine to not use this.
@@ -70,7 +70,7 @@ So now the architecture looks like this
 
 ![CDN Architecture](/assets/images/IMG_2079.jpeg)
 
-# Short haul vs Long haul
+## Short haul vs Long haul
 In an engagement you should ideally have 2 separate C2 channels serving different purposes
 
 short haul: this is where your day-to-day hands on keyboard activity happens, running commands, lateral movement, anything that requires semi-realtime interaction. It beacons frequently and gets used heavily. Ideally HTTPS.
