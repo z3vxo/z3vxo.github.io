@@ -68,5 +68,16 @@ The IPs the beacon is actually hitting belong to the CDN provider, sitting insid
 so now the architecture looks like this
 
 ```
-compromised machine <-> cdn.domain.com(resolves to cdn url via CNAME) <-> redirector <-> team server
+compromised machine <-> c2.yourdomain.com (CNAME <-> CDN or jusr directly call out to the cdn url) <-> redirector <-> team server
 ```
+
+# Short haul vs Long haul
+In an engagement you should idealy have 2 separate c2 channels serving different purposes
+
+short haul: this is where your day-to-day hands on keyboard activity happens, running commands, lateral movement, anything that requires semi-realtime interaction. It beacons frequantly and gets used heavily. Ideally HTTPs
+
+long haul: this is your persistence layey. It stays quiet checking in in 30 minutes to a day, sometimes longer. Ideally a DNS beacon since it simply needs to send a heartbeat and allow us to regain access incase the short haul beacon gets burned. You should rarely touch it
+
+The critical rule is: these should be completely seperate, you do not want your short haul infra to be burned and in turn have your long hual beacon lost, this means seperate domains, seperate redirectors and ideally seperate domain registrars and cloud providers, not a hard rule though
+
+Assume your short haul beacon will be burned, have backup servers and domains on standby that can be spun up a moments notice, your long haul is your saftey net, treat it like one
