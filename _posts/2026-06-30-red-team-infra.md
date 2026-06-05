@@ -66,9 +66,7 @@ The IPs the beacon is actually hitting belong to the CDN provider, sitting insid
 
 so now the architecture looks like this
 
-```
-compromised machine <-> c2.yourdomain.com (CNAME <-> CDN or jusr directly call out to the cdn url) <-> redirector <-> team server
-```
+![CDN Architecture](/assets/images/IMG_2079.jpeg)
 
 # Short haul vs Long haul
 In an engagement you should idealy have 2 separate c2 channels serving different purposes
