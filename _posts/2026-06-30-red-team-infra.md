@@ -48,7 +48,7 @@ Now our architecture looks like so
 But the redirector itself has a public IP. Maybe it’s not a fully trusted IP or it’s under a known abused ASN; it could still be blocked, mapped or used by the blue team to stop you, so how do you solve this?
 
 # Abusing CDNs
-<details>
+<details markdown="1">
 <summary>NOTE</summary>
 Not all engagements need to abuse a CDN. If your redirector’s IP is clean or you don’t have access to a CDN then it’s perfectly fine to not use this.
 
