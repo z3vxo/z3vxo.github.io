@@ -11,26 +11,26 @@ email: p9yfkg7t67@privaterelay.appleid.com
 
 
 # Disclosure 1: Deparment of employment and workplace relations
-![DEWR Acknowledgement](assets/images/dewr.png)
+![DEWR Acknowledgement](/assets/images/dewr.png)
 
 
 # Disclosure 2: Spudshed
-![Spudshed Disclosure](assets/images/spud_disclose.png)
+![Spudshed Disclosure](/assets/images/spud_disclose.png)
 
 ------
 ![Spudshed Acknowledgement](assets/images/spud.png)
 
 # Disclosure 3: Department of Climate Change, Energy, the Environment and Water
-![DCEEW Disclosure](assets/images/dceew_disclose.png)
+![DCEEW Disclosure](/assets/images/dceew_disclose.png)
 
 -----
-![Spudshed Acknowledgement](assets/images/dceew.png)
+![Spudshed Acknowledgement](/assets/images/dceew.png)
 
 # Disclosure 4: Ripple Group
-![Ripple Disclosure](assets/images/ripple_diclose.png)
+![Ripple Disclosure](/assets/images/ripple_diclose.png)
 
 ----
-![Ripple Acknowledgement](assets/images/ripple.png)
+![Ripple Acknowledgement](/assets/images/ripple.png)
 
 
 
