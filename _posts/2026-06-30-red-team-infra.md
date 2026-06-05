@@ -78,3 +78,6 @@ long haul: this is your persistence layey. It stays quiet checking in in 30 minu
 The critical rule is: these should be completely seperate, you do not want your short haul infra to be burned and in turn have your long hual beacon lost, this means seperate domains, seperate redirectors and ideally seperate domain registrars and cloud providers, not a hard rule though
 
 Assume your short haul beacon will be burned, have backup servers and domains on standby that can be spun up a moments notice, your long haul is your saftey net, treat it like one
+
+The architecture now looks like
+![Architecture](/assets/images/IMG_2084.jpeg)
