@@ -113,7 +113,9 @@ Once the TCP connection is established, we need to set up a secure encrypted con
 4. **Client Finished:** the client sends its own **Finished** message. The handshake is now complete and the encrypted session is established.
 
 **Note:** the big change from 1.2 is that the key exchange method is fixed (ephemeral ECDHE) rather than negotiated, and the key share is sent in the very first messages instead of after. This is what lets 1.3 finish in one round trip. It also enables 0-RTT resumption, where a returning client can send data in its very first message, though 0-RTT has replay-attack tradeoffs and isn't always enabled.## HTTP & Encapsulation
-<details>
+
+## HTTP
+<details markdown="1">
 <summary>NOTE: about HTTP/3</summary>
 <p>
 HTTP/3 uses QUIC, a modern transport protocol built on top of UDP instead of TCP like previous HTTP versions, QUIC provides the reliability and congestion control of TCP but without some of the overhead. It also includes built-in TLS, supports 0-RTT handshakes, enables better multiplexing through individual streams, and solves the head-of-line blocking issue that TCP can face.
