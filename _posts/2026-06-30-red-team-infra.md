@@ -93,6 +93,7 @@ you have 2 main options here
 1. Expired domains: expired domains are domains that have been  registered before but the person stopped paying or let it go, these are amazing because
     - pre aged, we can pick domains that have extensive aging, ideally 6 months old or more
     - pre catergorised, these domains may have been hosting legitmate content and got categorised(e.g "finance", "tech" etc)
+
 but there are cons
     - you cannot choose the domain name, if you need a specific domain tailored to your engagement it can fall short here
     - it may be in a spam db, abuse db or more, you must ensure it is completely clean
