@@ -174,12 +174,16 @@ Now the encapsulation process takes place, the above was layer 7 application
     - TTL(used to stop routing loops, gets decremented at every hop, if hits 0 thr packet is dropped)
     - and more
 
-Before the network stack can add the next header(ethernet) it needs to know destination MAC address, it does this by  checking if the destination IP is in the local network or if it needs to be routed to the default gateway, it does this through an AND operation 
-   - the AND operation works by taking the destination IP and subnet mask of the network and comparing the result against the LANs network IP for example
-        - subnet mask = 255.255.255.0
-        - destination IP = 47.58.29.50
-        - we then do 255.255.255.0 AND 47.58.29.50 = 47.58.29.0
-        - this does NOT match the network IP(192.168.1.0) so we know we must forward the request to the default gateway
+Before the network stack can add the next header (ethernet) it needs to know the destination MAC address. To get there it first has to decide whether the destination is on the local network or needs to be routed to the default gateway.
+
+To decide this, the host applies its own subnet mask to both its own IP and the destination IP, then compares the network portions:
+
+- local mask = 255.255.255.0
+- my IP = 192.168.1.10 → network = 192.168.1.0
+- destination IP = 47.58.29.50 → network = 47.58.29.0
+- 47.58.29.0 ≠ 192.168.1.0, so the destination is off-network and the packet goes to the default gateway
+
+Note that the host doesn't know the destination's actual subnet, it just tests whether the destination falls inside its *own* subnet using its *own* mask. If the network portions match, the destination is local and we ARP for it directly; if they don't, we forward to the default gateway.
 
 After it knows whether its remote or local our system then uses ARP to find the MAC address of the next hop
 Address resolution protocol is a layer 2 protocol used internally inside a LAN to map IPs to MACs, its specifically for IPv4 as IPv6 uses neighbourhood discovery protocol.  
