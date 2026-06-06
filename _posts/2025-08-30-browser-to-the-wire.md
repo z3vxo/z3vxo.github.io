@@ -54,7 +54,7 @@ our browser will now start the DNS process, which has 5 main steps
 
 Do Note that all of the above servers keep their own cache of recently converted domains and at each step it checks the cache first, most requests for big sites such as google.com, facebook.com etc will stop at the resolver, just didnt mention the cache at each server for brevity
 
-# Content Delivery Network
+## Content Delivery Network
 Facebook and almost all large sites these days use a CDN so ill quickly explain it
 A content delivery network is a global network of distributed servers that cache commonly requested static(images, js, html etc) resources, this means that instead of connecting to a server in let’s say Japan we connect to the closest edge server near us that returns the the resource for us(if it doesn’t have the resource or it’s a non-cachable resource the edge server reaches out to the origin server and pulls it. It does this through any cast routing, any cast routing is a routing method where multiple servers worldwide all broadcast the same IP address, then when the IP broadcast to the internet via BGP ISPs will automatically choose the closest server(closest in the sense of the least hops away not geographically closest but it usually is), this also has the added bonus that users never directly interact with the origin server, giving us a little bit of security 
 
@@ -62,15 +62,15 @@ A content delivery network is a global network of distributed servers that cache
 ## TCP Handshake
 Now that we have the IP of the server(or edge server whatever) we can start communicating with it, but since most of the web uses TCP as its transport method we need to form a connection with it, this is what the tcp handshake handles its used to setup a reliable and steady connection with the server and make sure both sides are ready too send and receive data between each other, it has 3 main steps
 1. First we send a TCP packet with the SYN flag set, this message also includes other data such as
-   - MSS: the Maximum segment size defines the largest size in bytes the application data can be inside a single tcp segment, its calculated as MTU - tcp headers - IP headers, which on most machines will result in a MSS of 1460, MSS was built specifaclly to help stop fragmentation at the IP, the MSS is stored in the OPTIONS field of the tcp packet and is a 4 byte value
+   - **MSS**: the Maximum segment size defines the largest size in bytes the application data can be inside a single tcp segment, its calculated as MTU - tcp headers - IP headers, which on most machines will result in a MSS of 1460, MSS was built specifaclly to help stop fragmentation at the IP, the MSS is stored in the OPTIONS field of the tcp packet and is a 4 byte value
         - kind (1 byte): 2 → indicates Maximum Segment Size option
         - Length (1 byte): 4 → total length of the option in bytes (always 4)
         - MSS value (2 bytes): the actual maximum segment size in bytes
 
-   - SACK: if the initiator of the connection supports SACK they will include a SACK permitted message, SACK is an extension to TCP and allows for more robust packet loss detection and handling, imagine during communication if the receiver received segments 1 2 4 5 6, its missing segment 3 so it keeps replying back to the sender with ACK 3 until the sender relises, the sender must now retransmit segment 3, 4 and 5, which is inefficient, SACK solves this by allowing the receiver to specify exactly what segment was lost and which ones they recevied, meaning the sender only has to resend the lost one, the SACK negotiation is also stored in the TCP options
+   - **SACK**: if the initiator of the connection supports SACK they will include a SACK permitted message, SACK is an extension to TCP and allows for more robust packet loss detection and handling, imagine during communication if the receiver received segments 1 2 4 5 6, its missing segment 3 so it keeps replying back to the sender with ACK 3 until the sender relises, the sender must now retransmit segment 3, 4 and 5, which is inefficient, SACK solves this by allowing the receiver to specify exactly what segment was lost and which ones they recevied, meaning the sender only has to resend the lost one, the SACK negotiation is also stored in the TCP options
         - Kind = 4 (SACK Permitted)
         - Length = 2
-   - Timestamp: another very common tcp option that is seen in the TCP handshake are timestamps, timestamps serve multiple purposes such as
+   - **Timestamp**: another very common tcp option that is seen in the TCP handshake are timestamps, timestamps serve multiple purposes such as
         - RTT calculation, timestamps allow for milliseconds accurate RTT calculation as all packets include the timestamp of when it was sent, the receiver then can just do TSecr_echoed - current_time = RTT
         - detecting duplicate/stale packets
      the way it works is that if the sender has timestamps enabled they will include 2 values in the tcp option, TSval which is the current timestamp and TSecr which is 0 for now since its used to echo back the senders TSval 
@@ -126,10 +126,10 @@ HTTP/3 uses QUIC, a modern transport protocol built on top of UDP instead of TCP
 
 Now that the secure TLS connection is established, our browser can finally request resources from the server using HTTP (Hypertext Transfer Protocol). HTTP is a Layer 7 application protocol that powers the web. It allows us to request files, submit forms, manage sessions, and interact with web applications.
 HTTP uses methods to define the operaiton we would like to do to such as:
-   - GET: request a resource
-   - POST: upload a resource(such as files)
-   - PUT: update a resource(such as usrr detsils)
-   - DELETE: delete a resource
+   - **GET**: request a resource
+   - **POST**: upload a resource(such as files)
+   - **PUT**: update a resource(such as usrr detsils)
+   - **DELETE**: delete a resource
 
 for us we would like to request a resource so we senda GET request, http also uses headers which allow us to send other details to the server some common ones are
    - User-Agent: a string thay identifies our device type, such as a mobile phone, desktop etc, it also includes whag browser we are using, the version and more
