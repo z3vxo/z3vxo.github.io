@@ -21,7 +21,7 @@ overview
    - [Routing](#routing)
 
 
-# DNS Process
+## DNS Process
 Domain name resolution protocol is a widely used protocol, its main goal is to convert human readable domains like "Facebook.com" into IP addresses
 this way instead of trying to remember "23.24.25.36" we can simply remember "Facebook.com"
 DNS runs over port 53/udp but can use TCP mainly for 
@@ -59,7 +59,7 @@ Facebook and almost all large sites these days use a CDN so ill quickly explain 
 A content delivery network is a global network of distributed servers that cache commonly requested static(images, js, html etc) resources, this means that instead of connecting to a server in let’s say Japan we connect to the closest edge server near us that returns the the resource for us(if it doesn’t have the resource or it’s a non-cachable resource the edge server reaches out to the origin server and pulls it. It does this through any cast routing, any cast routing is a routing method where multiple servers worldwide all broadcast the same IP address, then when the IP broadcast to the internet via BGP ISPs will automatically choose the closest server(closest in the sense of the least hops away not geographically closest but it usually is), this also has the added bonus that users never directly interact with the origin server, giving us a little bit of security 
 
 
-# TCP Handshake
+## TCP Handshake
 Now that we have the IP of the server(or edge server whatever) we can start communicating with it, but since most of the web uses TCP as its transport method we need to form a connection with it, this is what the tcp handshake handles its used to setup a reliable and steady connection with the server and make sure both sides are ready too send and receive data between each other, it has 3 main steps
 1. First we send a TCP packet with the SYN flag set, this message also includes other data such as
    - MSS: the Maximum segment size defines the largest size in bytes the application data can be inside a single tcp segment, its calculated as MTU - tcp headers - IP headers, which on most machines will result in a MSS of 1460, MSS was built specifaclly to help stop fragmentation at the IP, the MSS is stored in the OPTIONS field of the tcp packet and is a 4 byte value
@@ -86,35 +86,33 @@ note that there are more tcp options such as fast open, window scaling etc i jus
 also not all these options are present in every handshake, but they are still very common and enabled on most machines
 during the process each side sets up their intial sequence numbers, sequence numbers are used by tcp for segment re ordering, packet loss detection, keeping track of data etc
 
-# TLS Handshake
-Once the TCP connection is established, we need to set up a secure encrypted connection using HTTPS. This is done via the TLS handshake:
+## TLS Handshake
 
-1. Client Hello: The client sends a message including:
+Once the TCP connection is established, we need to set up a secure encrypted connection. This is done via the TLS handshake. The flow below describes TLS 1.3, which is what modern browsers use, it completes in a single round trip unlike the older 1.2 which needed two.
+
+1. **Client Hello:** the client kicks off the handshake by sending:
    - Supported cipher suites
    - Supported TLS versions
-   - Client random (32-byte value used in key derivation)
-   - Other handshake parameters
+   - A key share: the client already generates its ephemeral ECDHE public key and sends it now, guessing the group the server will pick
+   - Client random (32-byte value that feeds into the key schedule)
 
-2. Server Hello: The server responds with:
-   - Server’s certificate (for authentication)
-   - Chosen cipher suite
-   - Chosen TLS version
+2. **Server Hello:** the server responds, and in 1.3 this single flight contains almost everything:
+   - Chosen cipher suite and TLS version
    - Server random
+   - The server's own ephemeral ECDHE key share
 
-3. Certificate validation & key generation:
-   - The client validates the server’s certificate. 
-   - Both client and server then generate ephemeral keys for key exchange (TLS 1.3 uses ECDHE; RSA is only used for certificate signatures).
+   At this point both sides have each other's key shares, so they independently derive the shared secret via ECDHE. Everything after this in the handshake is already encrypted.
 
-4. Finished messages:
-   - The server sends a **Finished** message containing a hash of all previous handshake messages, encrypted with the session key.
-   - The client decrypts and verifies it, then responds with its own **Finished** message.
-   - The server decrypts and verifies the client’s Finished message.
+   The server then sends, now encrypted:
+   - Its certificate (for authentication)
+   - A **CertificateVerify** message: the server signs a hash of the handshake so far to prove it actually owns the private key for that certificate. This signature is where RSA or ECDSA comes in, 1.3 uses these for authentication only, never for key exchange
+   - A **Finished** message containing a hash of all previous handshake messages
 
-At this point, the handshake is complete and the encrypted session is established.
-Note: 
-   In TLS 1.3, the key exchange is included in the ServerHello, and the exact key generation method depends on the chosen cipher suite and TLS version. Modern browsers almost always use ephemeral ECDH for key exchange. TLS 1.3 also supports 0 RTT handshakes if the client has previously connected
+3. **Validation:** the client validates the certificate chain and verifies the server's CertificateVerify signature and Finished message. If anything fails here the connection is dropped.
 
-# HTTP & Encapsulation
+4. **Client Finished:** the client sends its own **Finished** message. The handshake is now complete and the encrypted session is established.
+
+**Note:** the big change from 1.2 is that the key exchange method is fixed (ephemeral ECDHE) rather than negotiated, and the key share is sent in the very first messages instead of after. This is what lets 1.3 finish in one round trip. It also enables 0-RTT resumption, where a returning client can send data in its very first message, though 0-RTT has replay-attack tradeoffs and isn't always enabled.## HTTP & Encapsulation
 <details>
 <summary>NOTE: about HTTP/3</summary>
 <p>
@@ -198,7 +196,7 @@ Address resolution protocol is a layer 2 protocol used internally inside a LAN t
 NOTE:
    if this was HTTP/3 using QUIC the transport layer would instead apply a UDP header, which is much simplier then a TCP header
 
-# Routing
+## Routing
 NOTE:
     the flow below assumes this router is the internet gateway and is NAT enabled, but do note that a devices default gateway isnt always a router, its common in large networks for each vlans default gateway to be a L3 Switch or another L3 device
 Now that our packet is fully constructed the network stack passes it to our NICs driver, if its a wireless driver it strips the ethernet header and adds a 802.11 header, it then encrypts the entire packet and forwards it to our gateway
@@ -269,5 +267,5 @@ now the NAT process happens in reverse
 4. our device then de encapsulates it, grabs the application payload 
 5. our browser then renders the page, runs the JS and potentially sends even more GET request if other files are needed such as css, images etc
 
-# Outro
+## Outro
 I hope you enjoyed my first blog post and maybe learned something new about what happens when you press Enter. The journey from your browser to the server involves many layers of protocols, security checks, and routing decisions, and this post only scratches the surface. I’d love to hear your thoughts, corrections, or questions.
