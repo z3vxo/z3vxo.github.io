@@ -45,7 +45,7 @@ Now our architecture looks like so
 
 ![Upgraded Architecture](/assets/images/IMG_2078.jpeg)
 
-But the redirector itself has a public IP. Maybe it’s not a fully trusted IP or it’s under a known abused ASN; it could still be blocked, mapped or used by the blue team to stop you, so how do you solve this?
+But the redirector itself has a public IP. Maybe it’s not a fully trusted IP or it’s under a known abused ASN, it could still be blocked, mapped or used by the blue team to stop you, so how do you solve this?
 
 ## Abusing CDNs
 <details markdown="1">
@@ -83,3 +83,18 @@ Assume your short haul beacon will be burned, have backup servers and domains on
 
 The architecture now looks like
 ![Architecture](/assets/images/IMG_2084.jpeg)
+
+## Domains
+
+Your domain is the critical piece of the infrastructure, even if you have a robust setup your domain can still bring it all down because its 3 days old and uncategorised, your domains should be pre aged, catergorised and not in any abuse DBs or spam DBs
+
+you have 2 main options here
+
+1. Expired domains: expired domains are domains that have been  registered before but the person stopped paying or let it go, these are amazing because
+    - pre aged, we can pick domains that have extensive aging, ideally 6 months old or more
+    - pre catergorised, these domains may have been hosting legitmate content and got categorised(e.g "finance", "tech" etc)
+but there are cons
+    - you cannot choose the domain name, if you need a specific domain tailored to your engagement it can fall short here
+    - it may be in a spam db, abuse db or more, you must ensure it is completely clean
+
+2. Buying your own domain: 
