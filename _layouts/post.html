@@ -4,7 +4,7 @@ layout: default
 
 <article>
   <div class="post-header">
-    <a href="{{ '/' | relative_url }}" class="post-back">← back to posts</a>
+    <a href="{{ '/blog/' | relative_url }}" class="post-back">← back to blog</a>
     {% assign words = content | number_of_words %}
     {% assign read_time = words | divided_by: 200 %}
     {% if read_time == 0 %}{% assign read_time = 1 %}{% endif %}

@@ -2,33 +2,112 @@
 layout: default
 ---
 
-<div class="page-hero">
-  <div class="hero-label">// recent posts</div>
-  <p>{{ site.description }}</p>
-</div>
+<section class="hero">
+  <div class="hero-eyebrow"><span class="status-dot"></span> offensive security · malware development · red teaming</div>
+  <h1 class="hero-title">z3vxo</h1>
+  <p class="hero-desc">I'm a security researcher working across <strong>web application security</strong>, <strong>malware development</strong>, and <strong>red team operations</strong>. I build offensive tooling, break access control, and document what I find.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+    <a class="btn" href="#findings">View findings</a>
+  </div>
+</section>
 
-<div class="post-grid">
-  {% for post in site.posts %}
-  <a href="{{ post.url | relative_url }}" class="post-card">
-    {% assign words = post.content | number_of_words %}
-    {% assign read_time = words | divided_by: 200 %}
-    {% if read_time == 0 %}{% assign read_time = 1 %}{% endif %}
-    <div class="post-card-meta">
-      <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-      <span class="read-time">{{ read_time }} min read</span>
-      {% if post.tags %}
+<section class="section" id="skills">
+  <div class="section-head">
+    <span class="section-label">01 / capabilities</span>
+    <h2>What I do</h2>
+    <p>Offensive security across the web layer, the endpoint, and the infrastructure behind it.</p>
+  </div>
+  <div class="skills-grid">
+    <article class="skill-card">
+      <span class="skill-num">01</span>
+      <h3>Web Security</h3>
+      <p>Testing authentication, access control and business logic across modern web apps and APIs. Focused on IDOR, broken access control and credential exposure.</p>
       <div class="post-tags">
-        {% for tag in post.tags limit:2 %}
-        <span class="tag">{{ tag }}</span>
-        {% endfor %}
+        <span class="tag">IDOR</span>
+        <span class="tag">BAC</span>
+        <span class="tag">API</span>
+        <span class="tag">Auth</span>
       </div>
-      {% endif %}
+    </article>
+    <article class="skill-card">
+      <span class="skill-num">02</span>
+      <h3>Malware Development</h3>
+      <p>Building offensive tooling from the ground up — C2 frameworks, loaders and Windows internals for red team engagements.</p>
+      <div class="post-tags">
+        <span class="tag">C2</span>
+        <span class="tag">C/C++</span>
+        <span class="tag">Windows</span>
+        <span class="tag">Evasion</span>
+      </div>
+    </article>
+    <article class="skill-card">
+      <span class="skill-num">03</span>
+      <h3>Red Teaming</h3>
+      <p>Adversary simulation from initial access through post-exploitation, including redirectors, C2 infrastructure and operational security.</p>
+      <div class="post-tags">
+        <span class="tag">Infrastructure</span>
+        <span class="tag">Phishing</span>
+        <span class="tag">PrivEsc</span>
+        <span class="tag">OPSEC</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="findings">
+  <div class="section-head">
+    <span class="section-label">02 / disclosure</span>
+    <h2>Selected findings</h2>
+    <p>A snapshot of vulnerabilities identified during security research.</p>
+  </div>
+  <div class="findings">
+    <article class="finding">
+      <div class="finding-head">
+        <div>
+          <h3>Spudshed</h3>
+          <div class="finding-kicker">Hard-coded credentials · mobile APK</div>
+        </div>
+        <div class="finding-stats">
+          <span class="finding-stat">443,332 users</span>
+        </div>
+      </div>
+      <ul>
+        <li>Credential set #1 granted <strong>elevated backend API access</strong>, including the search-user endpoint.</li>
+        <li>Credential set #2 exposed <strong>Mailchimp access</strong>, allowing arbitrary email to be sent from the trusted domain.</li>
+        <li>Exposed <strong>443,332 user records</strong>: name, email, phone, address and GPS data.</li>
+      </ul>
+    </article>
+
+    <article class="finding">
+      <div class="finding-head">
+        <div>
+          <h3>Alffie</h3>
+          <div class="finding-kicker">IDOR · broken access control · hard-coded credentials</div>
+        </div>
+        <div class="finding-stats">
+          <span class="finding-stat">5.4M documents</span>
+          <span class="finding-stat">500K users</span>
+        </div>
+      </div>
+      <ul>
+        <li>IDOR in the documents API exposed <strong>5.4 million documents</strong>.</li>
+        <li>IDOR in the booking endpoint leaked user details and allowed custom email sending.</li>
+        <li>Hard-coded AWS credentials provided <strong>read, write and delete</strong> access to the backend S3 bucket.</li>
+        <li>Broken access control exposed a <strong>500,000 user database</strong> through the admin export endpoint.</li>
+        <li>Exposed data included name, email, phone, address, student ID, Centrelink ID, passport photos and user media.</li>
+      </ul>
+    </article>
+  </div>
+  <p class="finding-note">Summaries only — no user data or exploit details are published.</p>
+</section>
+
+<section class="section" id="writing">
+  <div class="cta">
+    <div>
+      <h3>Notes from the field</h3>
+      <p>Write-ups on networking, malware development and offensive security.</p>
     </div>
-    <div class="post-card-title">{{ post.title }}</div>
-    {% if post.excerpt %}
-    <div class="post-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</div>
-    {% endif %}
-    <span class="post-read-more">read more →</span>
-  </a>
-  {% endfor %}
-</div>
+    <a class="btn btn-primary" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+  </div>
+</section>
