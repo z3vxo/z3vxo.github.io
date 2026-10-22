@@ -1,0 +1,18 @@
+---
+layout: default
+title: Findings
+---
+
+<div class="page-hero">
+  <div class="hero-label">// disclosure</div>
+  <h1 class="page-title">Findings</h1>
+  <p>Vulnerabilities identified during security research. Most organisations are anonymised; named findings were disclosed through official vulnerability disclosure programs.</p>
+</div>
+
+<div class="findings">
+  {% for finding in site.data.findings %}
+  {% include finding-card.html finding=finding %}
+  {% endfor %}
+</div>
+
+<p class="finding-note">Named findings were disclosed through official VDPs. No user data or exploit details are published.</p>

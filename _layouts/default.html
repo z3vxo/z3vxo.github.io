@@ -471,6 +471,13 @@
       margin-top: 0.4rem;
     }
 
+    .finding-org {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-top: 0.3rem;
+    }
+
     .finding-stats {
       display: flex;
       flex-wrap: wrap;
@@ -525,6 +532,10 @@
       font-family: var(--font-mono);
       font-size: 0.7rem;
       color: var(--text-muted);
+      margin-top: 1.4rem;
+    }
+
+    .section-action {
       margin-top: 1.4rem;
     }
 
@@ -976,6 +987,7 @@
       <a href="{{ '/' | relative_url }}" class="site-logo">~/{{ site.title | downcase }}</a>
       <nav>
         <ul class="site-nav">
+          <li><a href="{{ '/findings/' | relative_url }}">Findings</a></li>
           <li><a href="{{ '/blog/' | relative_url }}">Blog</a></li>
         </ul>
       </nav>

@@ -59,47 +59,17 @@ layout: default
   <div class="section-head">
     <span class="section-label">02 / disclosure</span>
     <h2>Selected findings</h2>
-    <p>A snapshot of vulnerabilities identified during security research.</p>
+    <p>Vulnerabilities identified during security research. Most organisations are anonymised; named findings were disclosed through official vulnerability disclosure programs.</p>
   </div>
   <div class="findings">
-    <article class="finding">
-      <div class="finding-head">
-        <div>
-          <h3>Spudshed</h3>
-          <div class="finding-kicker">Hard-coded credentials · mobile APK</div>
-        </div>
-        <div class="finding-stats">
-          <span class="finding-stat">443,332 users</span>
-        </div>
-      </div>
-      <ul>
-        <li>Credential set #1 granted <strong>elevated backend API access</strong>, including the search-user endpoint.</li>
-        <li>Credential set #2 exposed <strong>Mailchimp access</strong>, allowing arbitrary email to be sent from the trusted domain.</li>
-        <li>Exposed <strong>443,332 user records</strong>: name, email, phone, address and GPS data.</li>
-      </ul>
-    </article>
-
-    <article class="finding">
-      <div class="finding-head">
-        <div>
-          <h3>Alffie</h3>
-          <div class="finding-kicker">IDOR · broken access control · hard-coded credentials</div>
-        </div>
-        <div class="finding-stats">
-          <span class="finding-stat">5.4M documents</span>
-          <span class="finding-stat">500K users</span>
-        </div>
-      </div>
-      <ul>
-        <li>IDOR in the documents API exposed <strong>5.4 million documents</strong>.</li>
-        <li>IDOR in the booking endpoint leaked user details and allowed custom email sending.</li>
-        <li>Hard-coded AWS credentials provided <strong>read, write and delete</strong> access to the backend S3 bucket.</li>
-        <li>Broken access control exposed a <strong>500,000 user database</strong> through the admin export endpoint.</li>
-        <li>Exposed data included name, email, phone, address, student ID, Centrelink ID, passport photos and user media.</li>
-      </ul>
-    </article>
+    {% for finding in site.data.findings limit:3 %}
+    {% include finding-card.html finding=finding %}
+    {% endfor %}
   </div>
-  <p class="finding-note">Summaries only — no user data or exploit details are published.</p>
+  <p class="finding-note">Named findings were disclosed through official VDPs. No user data or exploit details are published.</p>
+  <div class="section-action">
+    <a class="btn" href="{{ '/findings/' | relative_url }}">View all findings →</a>
+  </div>
 </section>
 
 <section class="section" id="writing">

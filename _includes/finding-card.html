@@ -1,0 +1,23 @@
+<article class="finding">
+  <div class="finding-head">
+    <div>
+      <h3>{{ include.finding.name }}</h3>
+      {% if include.finding.org %}
+      <div class="finding-org">{{ include.finding.org }}</div>
+      {% endif %}
+      <div class="finding-kicker">{{ include.finding.types }}</div>
+    </div>
+    {% if include.finding.stats %}
+    <div class="finding-stats">
+      {% for stat in include.finding.stats %}
+      <span class="finding-stat">{{ stat }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <ul>
+    {% for bullet in include.finding.bullets %}
+    <li>{{ bullet }}</li>
+    {% endfor %}
+  </ul>
+</article>

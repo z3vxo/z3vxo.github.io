@@ -1,0 +1,83 @@
+- name: "DEWR"
+  org: "Department of Employment and Workplace Relations · Official VDP"
+  types: "Broken access control · information disclosure"
+  bullets:
+    - "The production API returned the <strong>full account list without authentication</strong>, including names, emails, ABNs and physical addresses."
+    - "The pre-production environment allowed open self-registration without Digital ID and granted sessions access to <strong>sensitive contact and account APIs</strong>."
+    - "Publicly exposed CIAM API documentation revealed DEWR's identity infrastructure, including <strong>invitation, passkey and B2C tenant operations</strong>."
+    - "Affected the Federal Safety Officer Online portal used by accredited users and companies."
+
+- name: "Online training provider"
+  types: "IDOR · broken access control · hard-coded AWS keys"
+  stats:
+    - "7.4M files"
+    - "~650K users"
+  bullets:
+    - "IDOR in the documents API exposed approximately <strong>7.4 million files</strong> spanning 2014–2026, including resumes, assessments, voice and video uploads, USI numbers and education records."
+    - "IDOR in the meeting and communication endpoints leaked user details and allowed <strong>arbitrary email sending</strong>."
+    - "Hard-coded AWS keys in client-side JavaScript allowed listing and overwriting <strong>compliance documents</strong> in S3."
+    - "Broken access control exposed the <strong>entire user base</strong> through a list endpoint."
+    - "Affected users included welfare recipients across two platforms, approximately <strong>650,000 accounts</strong>."
+
+- name: "DCCEEW"
+  org: "Department of Climate Change, Energy, the Environment and Water · Official VDP"
+  types: "IDOR · authorization bypass"
+  bullets:
+    - "IDOR in the Invoice Payment System allowed any authenticated user to retrieve <strong>other customers' invoices</strong> by changing a sequential invoice ID."
+    - "The ownership check could be bypassed by supplying an <strong>empty accountNumber parameter</strong>."
+    - "Exposed invoice amounts, payment status, customer reference numbers and PDFs containing company and buyer details."
+    - "The issue was present in both <strong>production and pre-production</strong> environments."
+
+- name: "State law enforcement agency"
+  types: "SSRF · log injection · broken access control"
+  bullets:
+    - "Publicly reachable API documentation exposed sensitive routes for <strong>person lookup, criminal history, payments and audit records</strong>."
+    - "Debug mode leaked stack traces, on-disk paths and <strong>framework versions</strong>."
+    - "Blind SSRF allowed the backend to reach internal Azure infrastructure, enabling <strong>internal network and port enumeration</strong>."
+    - "Unauthenticated logging endpoints allowed <strong>log injection and flooding</strong>."
+    - "A publicly accessible GIS service exposed operational data including <strong>CCTV locations and stream URLs</strong>, officer details, incident and intelligence fields."
+
+- name: "National gym chain"
+  types: "Hard-coded AWS keys · permissive Cognito role · broken access control"
+  stats:
+    - "100K–250K users"
+    - "5.3M files"
+  bullets:
+    - "Production source maps exposed <strong>hard-coded AWS IAM keys</strong> and the full GraphQL schema."
+    - "GraphQL queries returned <strong>full PII</strong>, bank account and card details, door-access logs, SMS history and contract records."
+    - "A Cognito identity pool issued unauthenticated AWS credentials with access to <strong>5.2M member contracts</strong> and ABA banking files."
+    - "An unauthenticated CMS endpoint allowed enumeration of temporary-user records by sequential ID."
+    - "Estimated exposure covered <strong>100,000–250,000 users</strong> and approximately 5.3 million files."
+
+- name: "National supermarket chain"
+  types: "Hard-coded credentials · mobile application"
+  stats:
+    - "443,332 users"
+  bullets:
+    - "Hard-coded API key provided <strong>elevated backend access</strong>, including a user-lookup endpoint supporting bulk enumeration."
+    - "Embedded Mailchimp credentials exposed subscriber metadata, including <strong>IP and GPS data</strong>."
+    - "A third key allowed arbitrary email to be sent from the company's <strong>trusted domain</strong>."
+    - "Combined exposure affected approximately <strong>443,332 users</strong>."
+
+- name: "Major mining company"
+  types: "Broken access control · SSRF · unauthenticated write access"
+  stats:
+    - "~6,000 employees"
+    - "~8,000 vehicles"
+  bullets:
+    - "Unauthenticated admin routes exposed approximately <strong>1,000 accounts</strong> and allowed creating admin users, modifying roles and reassigning vendors."
+    - "An SSRF in the token endpoint allowed requests to cloud metadata and internal services."
+    - "Unauthenticated APIs exposed <strong>employee records, contractor data and fleet details</strong>, including supervisor information, mine-site assignments and compliance documents."
+    - "Write and delete routes allowed adding vehicles, uploading attachments and <strong>deleting compliance documents</strong> without authentication."
+    - "Exposure covered approximately 6,000 employees, 700 contracted companies and 8,000 tracked vehicles."
+
+- name: "National energy company"
+  types: "Broken access control · unauthenticated GraphQL API"
+  stats:
+    - "~3,000 users"
+    - "~10,000 documents"
+  bullets:
+    - "An unauthenticated GraphQL endpoint returned roughly <strong>3,000 user records</strong> with names, corporate email, banking details and live password-reset tokens."
+    - "Approximately <strong>10,000 supplier documents</strong> were downloadable, including bank confirmations, ABN documents and approval records."
+    - "Live reset tokens enabled <strong>account takeover</strong>, including potential backoffice admin access."
+    - "The API also exposed approximately 2,200 vendor and 10,500 approval records."
